@@ -17,5 +17,26 @@ source venv/bin/activate
 pip install -r /home/ubuntu/django-campusdelivery/requirements.txt
 python3 manage.py makemigrations 
 python3 manage.py migrate
+
+#gunicorn 
+sudo cp /home/ubuntu/django-campusdelivery/gunicorn/gunicorn.socket  /etc/systemd/system/gunicorn.socket
+sudo cp /home/ubuntu/django-campusdelivery/gunicorn/gunicorn.service  /etc/systemd/system/gunicorn.service
+
+sudo systemctl start gunicorn.service
+sudo systemctl enable gunicorn.service
+
+#nginx
+
+sudo systemctl daemon-reload
+#systemctl restart gunicorn.service
+sudo rm -f /etc/nginx/sites-enabled/default
+
+sudo cp /home/ubuntu/django-campusdelivery/nginx/nginx.conf /etc/nginx/sites-available/django-campusdelivery
+sudo ln -s /etc/nginx/sites-available/django-campusdelivery /etc/nginx/sites-enabled/
+#sudo ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled
+sudo nginx -t
+sudo gpasswd -a www-data ubuntu
+sudo systemctl restart nginx
+
 # run server
 screen -d -m python3 manage.py runserver 0:8000
