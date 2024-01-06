@@ -38,5 +38,9 @@ sudo nginx -t
 sudo gpasswd -a www-data ubuntu
 sudo systemctl restart nginx
 
+echo $SECRET_KEY
+echo $DATABASE_URL
+echo $DEBUG
+echo $ALLOWED_HOSTS
 # run server
 screen -d -m python3 manage.py runserver 0:8000
