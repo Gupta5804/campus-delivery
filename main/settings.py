@@ -23,14 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e#6q(dxe@af3+@98-dtg)2r9q2zr-d1p@p^odzj_yqf17m6@&$'
-#SECRET_KEY = os.environ.get("SECRET_KEY")
+#SECRET_KEY = 'django-insecure-e#6q(dxe@af3+@98-dtg)2r9q2zr-d1p@p^odzj_yqf17m6@&$'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+#ALLOWED_HOSTS = ["*"]
+DEBUG = os.environ.get("DEBUG","False").lower() == "true"
 
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -84,7 +86,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-database_url="postgres://campusdelivery_django_user:VzYI4zb3aPiKLlUPglvvDgdlp4nE5qzB@dpg-cm9oiu21hbls73ba1t6g-a.singapore-postgres.render.com/campusdelivery_django"
+database_url=os.environ.get("DATABASE_URL")
+#database_url="postgres://campusdelivery_django_user:VzYI4zb3aPiKLlUPglvvDgdlp4nE5qzB@dpg-cm9oiu21hbls73ba1t6g-a.singapore-postgres.render.com/campusdelivery_django"
 DATABASES["default"] = dj_database_url.parse(database_url)
 
 # Password validation
