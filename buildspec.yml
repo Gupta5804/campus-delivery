@@ -10,7 +10,16 @@ version: 0.1
   #   STREAM_INCOMING_PUBLIC_KEY: changeme
   #   GOOGLE_API_KEY: changeme
   #   OPBEAT_ENABLED: False
-
+  #ALLOWED_HOSTS = '127.0.0.1 localhost 65.0.101.213'
+#DATABASE_URL = "postgres://campusdelivery_django_user:VzYI4zb3aPiKLlUPglvvDgdlp4nE5qzB@dpg-cm9oiu21hbls73ba1t6g-a.singapore-postgres.render.com/campusdelivery_django"
+#DEBUG = True
+#SECRET_KEY = "django-insecure-sy1hrm4zb_gu^%b+t=g+0-&$bnhity-yh#i&ivcvhi-tncrl2z"
+env:
+  parameter-store:
+    ALLOWED_HOSTS: "ALLOWED_HOSTS"
+    DATABASE_URL: "DATABASE_URL"
+    DEBUG: "DEBUG"
+    SECRET_KEY: "SECRET_KEY"
 phases:
   pre_build:
     commands:
