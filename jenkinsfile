@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    stages{
+        stage("Verifying tooling"){
+            steps{
+                sh '''
+                    docker version
+                    docker info
+                    docker compose version
+                    curl --version
+                    jq --version
+
+                '''
+            }
+        }
+        stage('Prune Docker data'){
+            steps{
+                sh 'docker system prun -a --volumes -f'
+            }
+        }
+        stage('Start container'){
+            steps{
+                sh 'docker compose up -f docker-compose.prod.yml up -d --build'
+                sh 'docker compose ps'
+            }
+        }
+        stage('Running tests agains the container'){
+            steps{
+                sh 'curl https://localhost:1337 | jq'
+            }
+        }
+
+    }
+    post {
+        always {
+            sh 'docker compose down --remove-orphans -v'
+            sh 'docker compose ps'
+        }
+    }
+}
