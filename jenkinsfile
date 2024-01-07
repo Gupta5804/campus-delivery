@@ -4,24 +4,25 @@ pipeline {
         stage("Verifying tooling"){
             steps{
                 sh '''
-                    sudo docker version
-                    sudo docker info
-                    sudo docker compose version
-                    sudo curl --version
-                    sudo jq --version
+                sudo su
+                    docker version
+                    docker info
+                    docker compose version
+                    curl --version
+                    jq --version
 
                 '''
             }
         }
         stage('Prune Docker data'){
             steps{
-                sh 'sudo docker system prun -a --volumes -f'
+                sh 'docker system prun -a --volumes -f'
             }
         }
         stage('Start container'){
             steps{
-                sh 'sudo docker compose up -f docker-compose.prod.yml up -d --build'
-                sh 'sudo docker compose ps'
+                sh 'docker compose up -f docker-compose.prod.yml up -d --build'
+                sh 'docker compose ps'
             }
         }
         stage('Running tests agains the container'){
