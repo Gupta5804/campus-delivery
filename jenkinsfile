@@ -22,7 +22,13 @@ pipeline {
         stage('Start container'){
             steps{
                 script{
-                   withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]) 
+                   withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]){
+                    sh echo 'ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}'
+                    sh echo 'DATABASE_URL = ${env.DATABASE_URL}'
+                    sh echo 'DEBUG = ${env.DEBUG}'
+                    sh echo 'SECRET_KEY = ${env.SECRET_KEY}'
+
+                   } 
                 }
                 sh 'docker-compose -f docker-compose.prod.yml up -d --build'
                 sh 'docker-compose ps'
