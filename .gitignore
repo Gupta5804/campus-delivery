@@ -5,4 +5,4 @@ __pycache
 .env.prod
 .env.prod.db
 .venv/
-aws-instance-sh/
+aws-instance-ssh/
