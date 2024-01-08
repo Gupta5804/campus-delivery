@@ -34,7 +34,7 @@ pipeline {
                 //sh 'docker-compose -f docker-compose.prod.yml ps'
             }
         }
-        stage('Running tests agains the container'){
+        stage('Running tests against the container'){
             steps{
                 sh 'curl https://localhost:80 | jq'
             }

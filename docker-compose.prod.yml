@@ -11,6 +11,8 @@ services:
       - media_volume:/home/app/web/mediafiles
     expose:
       - 8000
+    ports:
+      - "8000:8000"
     environment:
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
       - DATABASE_URL=${DATABASE_URL}
