@@ -13,8 +13,8 @@ services:
     ports:
       - 8001:8000
 
-    expose:
-      - 8001
+    #expose:
+    #  - 8000
     
     environment:
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
