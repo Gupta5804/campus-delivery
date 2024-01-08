@@ -11,7 +11,7 @@ services:
       - media_volume:/home/app/web/mediafiles
     
     ports:
-      - 0.0.0.0:8000:8000
+      - 172.31.0.0:8000:8000
 
     expose:
       - 8000
