@@ -23,6 +23,8 @@ pipeline {
             steps{
                 script{
                    withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]){
+
+                    echo '["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]'
                     sh 'docker-compose -f docker-compose.prod.yml up -d --build'
                     sh 'docker-compose -f docker-compose.prod.yml ps'
 
@@ -32,11 +34,11 @@ pipeline {
                 //sh 'docker-compose -f docker-compose.prod.yml ps'
             }
         }
-        //stage('Running tests agains the container'){
-        //    steps{
-                //sh 'curl https://localhost:1337 | jq'
-        //    }
-        //}
+        stage('Running tests agains the container'){
+            steps{
+                sh 'curl https://localhost:80 | jq'
+            }
+        }
 
     }
     //post {
