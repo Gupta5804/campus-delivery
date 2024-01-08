@@ -14,17 +14,17 @@ pipeline {
                 '''
             }
         }
-        stage('Prune Docker data'){
-           steps{
-                sh 'docker system prune -a --volumes -f'
-            }
-        }
+        // stage('Prune Docker data'){
+        //    steps{
+        //         sh 'docker system prune -a --volumes -f'
+        //     }
+        // }
         stage('Start container'){
             steps{
                 script{
                    withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]){
 
-                    echo '["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]'
+                    echo '[ALLOWED_HOSTS = ${env.ALLOWED_HOSTS},DATABASE_URL = ${env.DATABASE_URL},DEBUG = ${env.DEBUG},SECRET_KEY = ${env.SECRET_KEY}]'
                     sh 'docker-compose -f docker-compose.prod.yml up -d --build'
                     sh 'docker-compose -f docker-compose.prod.yml ps'
 
