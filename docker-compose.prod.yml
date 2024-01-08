@@ -5,14 +5,14 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile.prod
-    command: gunicorn main.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn main.wsgi:application --bind 0.0.0.0:80
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
     
     ports:
-      - "8000:8000"
-      - "8000:80"
+      - "80:80"
+      
 
     #expose:
     #  - 8000
