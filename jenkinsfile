@@ -32,11 +32,11 @@ pipeline {
                 //sh 'docker-compose -f docker-compose.prod.yml ps'
             }
         }
-        stage('Running tests agains the container'){
-            steps{
+        //stage('Running tests agains the container'){
+        //    steps{
                 //sh 'curl https://localhost:1337 | jq'
-            }
-        }
+        //    }
+        //}
 
     }
     //post {
