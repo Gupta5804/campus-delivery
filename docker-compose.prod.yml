@@ -14,8 +14,8 @@ services:
       - 8000:8000
       - 127.0.0.1:80:8000
 
-    expose:
-      - 80
+    #expose:
+    #  - 80
     
     environment:
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
