@@ -25,6 +25,7 @@ pipeline {
                    withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]){
 
                     echo '[ALLOWED_HOSTS = ${env.ALLOWED_HOSTS},DATABASE_URL = ${env.DATABASE_URL},DEBUG = ${env.DEBUG},SECRET_KEY = ${env.SECRET_KEY}]'
+                    sh 'sudo su'
                     sh 'sudo docker-compose -f docker-compose.prod.yml up -d --build'
                     sh 'sudo docker-compose -f docker-compose.prod.yml ps'
 
