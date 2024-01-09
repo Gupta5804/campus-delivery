@@ -39,7 +39,7 @@ services:
       - web
     networks:
       local_network:
-        - ipv4:172.18.0.1
+        - ipv4_address:172.18.0.1
 
 volumes:
   #postgres_data:
