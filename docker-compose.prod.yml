@@ -10,8 +10,8 @@ services:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
 
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
     
     environment:
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
@@ -37,6 +37,9 @@ services:
       - 1337:80
     depends_on:
       - web
+    networks:
+      local_network:
+        ipv4:172.18.0.1
 
 volumes:
   #postgres_data:
