@@ -22,7 +22,7 @@ pipeline {
         stage('Start container'){
             steps{
                 script{
-                   withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}","DEFAULT_EMAIL=${env.DEFAULT_EMAIL}","ACME_CA_URI=${env.ACME_CA_URI}","NGINX_PROXY_CONTAINER=${env.NGINX_PROXY_CONTAINER}","LETSENCRYPT_HOST = ${env.LETSENCRYPT_HOST}","CSRF_TRUSTED_ORIGINS = ${env.CSRF_TRUSTED_ORIGINS}"]){
+                   withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]){
 
                     echo '[ALLOWED_HOSTS = ${env.ALLOWED_HOSTS},DATABASE_URL = ${env.DATABASE_URL},DEBUG = ${env.DEBUG},SECRET_KEY = ${env.SECRET_KEY}]'
                     
