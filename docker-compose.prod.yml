@@ -13,6 +13,8 @@ services:
 
     ports:
       - 80:8000
+    expose:
+      - 8000
     
     environment:
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
@@ -39,7 +41,7 @@ services:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
     ports:
-      - 80:80
+      - 8000:8000
     depends_on:
       - web
 
