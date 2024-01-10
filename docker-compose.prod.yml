@@ -33,7 +33,6 @@ services:
   #   env_file:
   #     - ./.env.prod.db
   nginx:
-    restart: always
     build: 
       context: ./nginx
       dockerfile: Dockerfile.prod
