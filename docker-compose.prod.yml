@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   web:
+    container_name: campusdelivery
     build:
       context: ./app
       dockerfile: Dockerfile.prod
@@ -29,17 +30,18 @@ services:
   #   env_file:
   #     - ./.env.prod.db
   nginx:
+    container_name: nginx_proxy
     build: ./nginx
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
     ports:
-      - 1337:80
+      - 1337:1337
     depends_on:
       - web
     networks:
       local_network:
-        ipv4_address:172.18.0.1
+        ipv4_address: 172.31.37.205
 
 volumes:
   #postgres_data:
