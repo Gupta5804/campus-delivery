@@ -4,6 +4,7 @@ __pycache
 .env.dev
 .env.prod
 .env.prod.db
+.env.proxy.dev
 .venv/
 aws-instance-ssh/
 app/mediafiles/
