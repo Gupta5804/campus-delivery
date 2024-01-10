@@ -12,7 +12,7 @@ services:
       - media_volume:/home/app/web/mediafiles
 
     ports:
-      - 80:8000
+      - 8000:8000
     
     environment:
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
