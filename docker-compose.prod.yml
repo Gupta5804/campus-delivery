@@ -31,7 +31,9 @@ services:
   #     - ./.env.prod.db
   nginx:
     container_name: nginx_proxy
-    build: ./nginx
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile.prod
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
