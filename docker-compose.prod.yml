@@ -33,20 +33,37 @@ services:
   #     - ./.env.prod.db
   nginx:
     restart: always
-    container_name: nginx_proxy
     build: 
       context: ./nginx
       dockerfile: Dockerfile.prod
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
-    #  - ./data/certbot/conf:/etc/letsencrypt
-    #  - ./data/certbot/www:/var/www/certbot
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
       - 80:80
-      #- 443:443
+      - 443:443
     depends_on:
       - web
+  acme-companion:
+    image: nginxproxy/acme-companion
+    environment:
+      - DEFAULT_EMAIL=${DEFAULT_EMAIL}
+      - ACME_CA_URI=${ACME_CA_URI}
+      - NGINX_PROXY_CONTAINER=${NGINX_PROXY_CONTAINER}
+    #env_file:
+    #  - ./.env.staging.proxy-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - acme:/etc/acme.sh
+    depends_on:
+      - nginx
   #certbot:
   #  image: certbot/certbot
   #  container_name: certbot
