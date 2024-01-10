@@ -22,7 +22,7 @@ pipeline {
         stage('getting certbot certificates'){
             steps{
                 script{
-                    sh 'docker-compose -f run docker-compose.prod.yml --rm certbot certonly --webroot --webroot-path=/var/www/certbot --email gupta.rishabh.abcd@gmail.com --agree-tos --no-eff-email -13.234.207.114'
+                    sh 'docker-compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path=/var/www/certbot --email gupta.rishabh.abcd@gmail.com --agree-tos --no-eff-email -13.234.207.114'
                 }
             }
         }
