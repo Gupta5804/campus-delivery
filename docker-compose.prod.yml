@@ -39,9 +39,6 @@ services:
       - 1337:1337
     depends_on:
       - web
-    networks:
-      local_network:
-        ipv4_address: 172.31.37.205
 
 volumes:
   #postgres_data:
