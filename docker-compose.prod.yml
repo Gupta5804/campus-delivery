@@ -35,14 +35,12 @@ services:
   #     - ./.env.prod.db
   nginx:
     container_name: nginx-proxy
-    build: 
-      context: ./nginx
-      dockerfile: Dockerfile.prod
+    build: ./nginx
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
     ports:
-      - 8001:80
+      - 80:80
 
     depends_on:
       - web
