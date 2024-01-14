@@ -1,6 +1,6 @@
 FROM node:lts-alpine3.12 as build
 
-WORKDIR /frontend
+# WORKDIR /frontend
 RUN pwd
 COPY ./frontend/package.json ./
 COPY ./frontend/yarn.lock ./
