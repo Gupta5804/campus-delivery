@@ -9,4 +9,4 @@ def home(request):
 
 class index(APIView):
     def get(self, request, format=None):
-        return Response('Hello World!')   
+        return Response('Hello World!')
