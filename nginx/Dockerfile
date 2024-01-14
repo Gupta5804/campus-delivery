@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.12 as build
+FROM node:21-alpine3.18 as build
 
 WORKDIR /frontend
 
