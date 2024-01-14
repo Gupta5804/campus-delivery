@@ -3,11 +3,13 @@ version: '3.8'
 services:
   web:
     build: ./app
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn main.wsgi:application --bind 0.0.0.0:8000 -w 2
     volumes:
-      - ./app/:/usr/src/app/
-    ports:
-      - 8000:8000
+      #- ./app/:/usr/src/app/
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    expose:
+      - 8000
     env_file:
       - ./.env.dev
     depends_on:
@@ -20,6 +22,28 @@ services:
       - POSTGRES_USER=hello_django
       - POSTGRES_PASSWORD=hello_django
       - POSTGRES_DB=hello_django_dev
+  frontend:
+    container_name: frontend
+    image: frontend:custom
+    build: ./frontend
+    expose:
+      - 3000
+    command: serve -s /usr/app/build -l 3000
+    depends_on:
+      - web
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    ports:
+      - 1337:80
 
+    depends_on:
+      - frontend
+  
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
