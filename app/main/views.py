@@ -7,7 +7,6 @@ def home(request):
     return render(request, "home.html")
 
 
-class index(APIView):    
-    def get(self, request, format=None):    
-        return Response('Hello World!')
-    
+class index(APIView):
+    def get(self, request, format=None):
+        return Response('Hello World!')   
