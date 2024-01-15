@@ -21,6 +21,7 @@ pipeline {
         // }
         stage('Start container'){
             steps{
+                
                 script{
                    withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]){
 
