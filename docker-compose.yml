@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     build: ./app
-    command: gunicorn main.wsgi:application --bind 0.0.0.0:8000 -w 2
+    command: gunicorn main.wsgi:application --bind 0.0.0.0:8000
     volumes:
       #- ./app/:/usr/src/app/
       - static_volume:/home/app/web/staticfiles

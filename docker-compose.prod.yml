@@ -44,15 +44,15 @@ services:
 
     depends_on:
       - web
-  frontend:
-    container_name: frontend
-    image: frontend:custom
-    build: ./frontend
-    expose:
-      - 3000
-    command: serve -s /usr/app/build -l 3000
-    depends_on:
-      - web
+  #frontend:
+  #  container_name: frontend
+  #  image: frontend:custom
+  #  build: ./frontend
+  #  expose:
+  #    - 3000
+  #  command: serve -s /usr/app/build -l 3000
+  #  depends_on:
+  #    - web
 
 volumes:
   #postgres_data:
