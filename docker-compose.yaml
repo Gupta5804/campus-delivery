@@ -4,16 +4,13 @@ services:
   backend:
     volumes:
       - static:/static
+    env_file:
+      - .env.dev
     build:
       context: ./backend
     ports:
       - "8000:8000"
-    environment:
-      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
-      - DATABASE_URL=${DATABASE_URL}
-      - DEBUG=${DEBUG}
-      - SECRET_KEY=${SECRET_KEY}
-  
+
   frontend:
     build:
       context: ./frontend
@@ -33,7 +30,4 @@ services:
 
 volumes:
   static:
-  frontend:    
-    
-    
-
+  frontend:
