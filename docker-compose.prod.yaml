@@ -11,9 +11,11 @@ services:
 
     ports:
       - 8000:8000
-    env_file:
-      - ./apps/web/.env
-
+    environment:
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - DATABASE_URL=${DATABASE_URL}
+      - DEBUG=${DEBUG}
+      - SECRET_KEY=${SECRET_KEY}
 
   www:
     container_name: www
