@@ -8,7 +8,7 @@ WORKDIR /app/web/
 COPY ./apps/web/ .
 
 RUN /opt/venv/bin/pip install pip --upgrade && \
-    /opt/venv/bin/pip install -r /app/web/requirements.txt && \ 
+    /opt/venv/bin/pip install -r /app/web/requirements.txt --no-cache-dir && \ 
     chmod +x /app/web/scripts/entrypoint.sh
     
     

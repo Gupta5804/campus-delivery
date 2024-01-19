@@ -17,7 +17,7 @@ class Command(BaseCommand):
         try:
             user = User(
                 email=DJANGO_SUPERUSER_EMAIL,
-                username=DJANGO_SUPERUSER_USERNAME,
+                
             )
             user.set_password(DJANGO_SUPERUSER_PASSWORD)
             user.is_superuser = True
