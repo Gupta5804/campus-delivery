@@ -30,7 +30,7 @@ pipeline {
             steps{
                 
                 script{
-                   withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}"]){
+                   withEnv(["ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}","DATABASE_URL = ${env.DATABASE_URL}","DEBUG = ${env.DEBUG}","SECRET_KEY = ${env.SECRET_KEY}","AWS_SES_FROM_EMAIL = ${env.AWS_SES_FROM_EMAIL}","AWS_SES_ACCESS_KEY_ID = ${env.AWS_SES_ACCESS_KEY_ID}","AWS_SES_SECRET_ACCESS_KEY = ${env.AWS_SES_SECRET_ACCESS_KEY}"]){
 
                     echo '[ALLOWED_HOSTS = ${env.ALLOWED_HOSTS},DATABASE_URL = ${env.DATABASE_URL},DEBUG = ${env.DEBUG},SECRET_KEY = ${env.SECRET_KEY}]'
                     

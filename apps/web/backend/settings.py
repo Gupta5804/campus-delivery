@@ -80,7 +80,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
-
+DEFAULT_FROM_EMAIL = os.environ.get("AWS_SES_FROM_EMAIL")
+# Email settings 
+EMAIL_BACKEND = 'django_ses.SESBackend'
+AWS_SES_ACCESS_KEY_ID = os.environ.get("AWS_SES_ACCESS_KEY_ID")
+AWS_SES_SECRET_ACCESS_KEY = os.environ.get("AWS_SES_SECRET_ACCESS_KEY")
+AWS_SES_REGION_NAME = 'ap-south-1'
+AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
+AWS_SES_FROM_EMAIL = os.environ.get("AWS_SES_FROM_EMAIL")
+USE_SES_V2 = True
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
