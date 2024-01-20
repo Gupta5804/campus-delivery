@@ -5,7 +5,7 @@ services:
     container_name: web
     build:
       context: .
-      dockerfile: apps/docker/web/Dockerfile
+      dockerfile: apps/docker/web/Dockerfile.prod
     volumes:
       - static:/app/web/static
 

@@ -41,7 +41,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     # first_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True,max_length=255)
     # date_of_birth = models.DateField()
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -58,8 +58,17 @@ class UserCustomer(models.Model):
     user = models.OneToOneField(CustomUser,on_delete = models.CASCADE,primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    address = models.CharField(max_length=120)
+    dob = models.CharField(max_length=50)
+    contact_no = models.CharField(max_length=20)
+    alternative_no = models.CharField(max_length=20)
+    
+
     
 class UserShop(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     shop_name = models.CharField(max_length=50)
     address = models.TextField(blank=True, null=True)
+    about_shop = models.CharField(max_length=500)
+    contact_no = models.CharField(max_length=20)
+    alternative_no = models.CharField(max_length=20)
