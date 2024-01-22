@@ -47,13 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'custom_commands',
+    'corsheaders',
     'djoser',
+    'social_django',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -90,6 +93,10 @@ AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
 AWS_SES_FROM_EMAIL = os.environ.get("AWS_SES_FROM_EMAIL")
 USE_SES_V2 = True
 
+
+# Email Template variables
+DOMAIN = os.environ.get('DOMAIN')
+SITE_NAME = "Campus Connect"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -140,9 +147,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+
+]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'users.authentication.CustomJWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES':(
         'rest_framework.permissions.IsAuthenticated',
@@ -157,8 +170,30 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE':True,
     'PASSWORD_RESET_CONFIRM_RETYPE':True,
     'TOKEN_MODEL':None,
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS':os.environ.get("REDIRECT_URLS")
 
 }
+
+AUTH_COOKIE = 'access'
+AUTH_COOKIE_ACCESS_MAX_AGE = 60 * 5
+AUTH_COOKIE_REFRESH_MAX_AGE = 60 * 60 * 24
+AUTH_COOKIE_SECURE = os.environ.get('AUTH_COOKIE_SECURE','True') == 'True'
+AUTH_COOKIE_HTTP_ONLY = True
+AUTH_COOKIE_PATH = '/'
+AUTH_COOKIE_SAMESITE = 'None'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("GOOGLE_AUTH_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("GOOGLE_AUTH_SECRET_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'openid'
+
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name','last_name']
+
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS").split(" ")
+CORS_ALLOW_CREDENTIALS = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
