@@ -34,7 +34,10 @@ services:
       dockerfile: apps/docker/www/Dockerfile
     volumes:
       - node_modules:/app/www/node_modules
-
+    environment:
+      - HOSTNAME=${HOSTNAME}
+      - PORT=${PORT}
+      - NEXT_PUBLIC_HOST=${NEXT_PUBLIC_HOST}
     ports:
       - 3000:3000
 
