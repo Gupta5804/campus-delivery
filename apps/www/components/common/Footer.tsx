@@ -5,10 +5,10 @@ export default function Footer() {
     return (
         <footer className="footer items-center p-4 bg-neutral text-neutral-content">
   <aside className="items-center grid-flow-col">
-    <Image src="/image/white-logo-png.PNG"
-      width={120}
-      height={100}
-      alt="Campus Connectr" className="fill-current"></Image> 
+    <img src="/image/white-logo-png.PNG"
+      width='120'
+      height='100'
+      alt="Campus Connect" className="fill-current"></img> 
       <div className="divider divider-horizontal divider-primary"></div>
     <p>Copyright © 2024 - All right reserved</p>
   </aside> 
