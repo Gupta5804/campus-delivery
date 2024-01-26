@@ -11,7 +11,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('email', 'password')}),
         (_('Personal Info'), {'fields': ('first_name','last_name', 'address', 'dob','user_type', 'contact_no', 'alternative_no')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        (_('Important dates'), {'fields': ('last_login')}),
+        (_('Important dates'), {'fields': ('last_login',)}),
     )
 
 admin.site.register(CustomUser, CustomUserAdmin)
