@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRegisterMutation } from "@/redux/features/authApiSlice";
 import { toast } from 'react-toastify';
 import Spinner from "@/components/common/Spinner";
-
+import colorLogo from "../../../public/image/color-logo-png.png"
 export default function Page(){
   const router = useRouter();
   const [register, { isLoading }] = useRegisterMutation();
@@ -40,7 +40,7 @@ export default function Page(){
         <div className="flex flex-col w-6/12 px-6 py-6 lg:px-8 card bg-zinc-100 shadow-xl mx-auto mt-5 mb-5">
             <Image
             className= "self-center p-3 border-2 border-white"
-            src= '/image/color-logo-png.png'
+            src= { colorLogo }
             alt="Your Company"
             width={220}
             height={200}

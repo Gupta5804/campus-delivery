@@ -1,4 +1,5 @@
 import Image from "next/image"
+import footer_logo from '../../public/image/white-logo-png.png'
 
 
 export default function Footer() {
@@ -6,7 +7,7 @@ export default function Footer() {
     return (
         <footer className="footer items-center p-4 bg-neutral text-neutral-content">
   <aside className="items-center grid-flow-col">
-    <Image src="/image/white-logo-png.png"
+    <Image src={ footer_logo }
       width={120}
       height={100}
       alt="Campus Connectr" className="fill-current"></Image> 
