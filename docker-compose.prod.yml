@@ -25,7 +25,9 @@ services:
       - REDIRECT_URLS=${REDIRECT_URLS}
       - GOOGLE_AUTH_KEY=${GOOGLE_AUTH_KEY}
       - GOOGLE_AUTH_SECRET_KEY=${GOOGLE_AUTH_SECRET_KEY}
-      
+      - HOSTNAME = ${HOSTNAME}"
+      - PORTs=${PORTs}
+      - NEXT_PUBLIC_HOST=${NEXT_PUBLIC_HOST}
 
   www:
     container_name: www
