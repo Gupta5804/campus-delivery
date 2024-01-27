@@ -21,7 +21,7 @@ interface Props {
 export default function Form({ config, isLoading, btnText, onChange, onSubmit }: Props) {
     return (
         <form className="space-y-6 form-control" onSubmit = {onSubmit}>
-            { config.map((input) => (
+            { config.map(input => (
                 <>
                     <Input
                         labelId={input.labelId}
@@ -32,15 +32,16 @@ export default function Form({ config, isLoading, btnText, onChange, onSubmit }:
                     >
                         {input.labelText}
                     </Input>
-                    <div className="card-actions justify-end">
-                        <button className="btn glass btn-accent flex w-full justify-center bg-indigo-600 shadow-lg text-white mt-5">
-
-                            {isLoading ? <Spinner sm /> : `${ btnText }`}
-                        </button>
-
-                    </div></>
-
-            ))}
+                </>
+                ))}
+            
+            <div className="card-actions justify-end">
+                <button 
+                    className="btn glass btn-accent flex w-full justify-center bg-indigo-600 shadow-lg text-white mt-5"
+                    >
+                    {isLoading ? <Spinner sm /> : `${ btnText }`}
+                </button>
+            </div>
             
 
         </form>

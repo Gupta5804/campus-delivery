@@ -16,6 +16,7 @@ export default function RegisterForm() {
   } = useRegister();
   const config = [
     {
+      key: 1,
       labelText: 'First Name',
       labelId: 'first_name',
       type: 'text',
@@ -23,6 +24,7 @@ export default function RegisterForm() {
       required: true,
     },
     {
+      
       labelText: 'Last Name',
       labelId: 'last_name',
       type: 'text',
@@ -30,6 +32,7 @@ export default function RegisterForm() {
       required: true,
     },
     {
+      
       labelText: 'E-mail Address',
       labelId: 'email',
       type: 'email',
@@ -37,6 +40,7 @@ export default function RegisterForm() {
       required: true,
     },
     {
+      
       labelText: 'Password',
       labelId: 'password',
       type: 'password',
@@ -44,6 +48,7 @@ export default function RegisterForm() {
       required: true,
     },
     {
+      
       labelText: 'Confirm Password',
       labelId: 're_password',
       type: 'password',
