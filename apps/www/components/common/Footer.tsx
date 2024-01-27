@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <footer className="footer items-center p-4 bg-neutral text-neutral-content">
   <aside className="items-center grid-flow-col">
-    <img src={ footer_logo }
+    <img src="/image/white-logo-png.png"
       width='120'
       height="100"
       alt="Campus Connect" className="fill-current"></img> 

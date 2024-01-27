@@ -40,7 +40,7 @@ export default function Page(){
         <div className="flex flex-col w-6/12 px-6 py-6 lg:px-8 card bg-zinc-100 shadow-xl mx-auto mt-5 mb-5">
             <img
             className= "self-center p-3 border-2 border-white"
-            src= { colorLogo }
+            src= '/image/color-logo-png.png'
             alt="Your Company"
             width='220'
             height='200'
