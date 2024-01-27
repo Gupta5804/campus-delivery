@@ -21,7 +21,7 @@ export default function Page(){
   const {first_name, last_name, email, password, re_password } = formData;
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value })
+    setFormData({ ...formData, [name]: value });
   }
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ export default function Page(){
     })
     .catch(() => {
       toast.error('Failed to register Account');
-    })
+    });
   }
     return (
         <>
