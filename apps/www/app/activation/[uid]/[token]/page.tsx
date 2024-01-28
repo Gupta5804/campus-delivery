@@ -18,16 +18,16 @@ export default function Page({ params }: Props){
         const { uid, token } = params;
 
         activation({ uid, token })
-            .unwrap()
-            .then(() => {
-                toast.success('Account Activated Successfully');
-            })
-            .catch(() => {
-               // toast.error('Failed to Activate account');
-            })
-            .finally(() =>{
-                router.push('/');
-            });
+        .unwrap()
+        .then(() => {
+            toast.success('Account Activated Successfully');
+        })
+        .catch(() => {
+            // toast.error('Failed to Activate account');
+        })
+        .finally(() =>{
+            router.push('/');
+        });
     }, []);
     return (
         <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
