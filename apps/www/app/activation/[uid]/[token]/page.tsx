@@ -23,7 +23,7 @@ export default function Page({ params }: Props){
                 toast.success('Account Activated Successfully');
             })
             .catch(() => {
-                toast.error('Failed to activate account');
+               // toast.error('Failed to Activate account');
             })
             .finally(() =>{
                 router.push('/');
