@@ -1,4 +1,4 @@
-'use Client';
+'use client';
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,7 @@ interface Props {
     params: {
         uid:string;
         token:string;
-    }
+    };
 }
 
 export default function Page({ params }: Props){
