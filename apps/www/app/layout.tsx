@@ -26,12 +26,15 @@ export default function RootLayout({
       
       </head>
       <body className={inter.className}>
+        <div className="min-h-screen flex flex-col relative pb-20">
         <Provider>
           <Setup/>
+          <div className="px-2 sm:px-6 md:px-8 my-8">
           {children}
+          </div>
           <Footer/>
         </Provider>
-      
+      </div>
       </body>
       
     </html>
