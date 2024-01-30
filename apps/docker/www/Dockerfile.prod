@@ -6,9 +6,9 @@ WORKDIR /app/www
 
 COPY ./apps/www/ .
 
-
+RUN echo $NEXT_PUBLIC_HOST 
 RUN npm install
-
+ENV NEXT_PUBLIC_HOST=$NEXT_PUBLIC_HOST
 RUN npm run build
 
 EXPOSE 3000
