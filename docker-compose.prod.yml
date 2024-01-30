@@ -36,7 +36,7 @@ services:
       dockerfile: apps/docker/www/Dockerfile.prod
     volumes:
       - node_modules:/app/www/node_modules
-    environment:
+    args:
       - NEXT_PUBLIC_HOST=${NEXT_PUBLIC_HOST}
       - NODE_ENV=${NODE_ENV}
     ports:
