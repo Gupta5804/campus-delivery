@@ -31,7 +31,10 @@ const config: Config = {
       }
     },
   },
-  plugins: [require("@tailwindcss/forms"),require("@tailwindcss/typography"),require("daisyui")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+    require("daisyui")],
   daisyui:{
     themes: ["nord"],
     styled: true,

@@ -11,8 +11,6 @@
     "start": "pm2-runtime server.js --name www"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.18",
-    "@heroicons/react": "^2.1.1",
     "@material-tailwind/react": "^2.1.8",
     "@reduxjs/toolkit": "^2.0.1",
     "@tailwindcss/forms": "^0.5.7",
@@ -31,6 +29,8 @@
     "sharp": "^0.33.2"
   },
   "devDependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

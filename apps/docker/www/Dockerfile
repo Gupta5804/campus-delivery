@@ -1,6 +1,6 @@
 FROM node:alpine
 
-CMD [ "mkdir", "/app/www/" ]
+# CMD [ "mkdir", "/app/www/" ]
 
 WORKDIR /app/www
 
