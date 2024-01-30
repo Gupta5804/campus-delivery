@@ -45,7 +45,7 @@ pipeline {
                     "REDIRECT_URLS = ${env.REDIRECT_URLS}",
                     "GOOGLE_AUTH_KEY = ${env.GOOGLE_AUTH_KEY}",
                     "GOOGLE_AUTH_SECRET_KEY = ${env.GOOGLE_AUTH_SECRET_KEY}",
-                    //"NEXT_PUBLIC_HOST = ${env.NEXT_PUBLIC_HOST}",
+                    "NEXT_PUBLIC_HOST = ${env.NEXT_PUBLIC_HOST}",
                     "DJANGO_SUPERUSER_PASSWORD=${env.DJANGO_SUPERUSER_PASSWORD}",
                     "DJANGO_SUPERUSER_USERNAME=${env.DJANGO_SUPERUSER_USERNAME}",
                     "DJANGO_SUPERUSER_EMAIL=${env.DJANGO_SUPERUSER_EMAIL}",

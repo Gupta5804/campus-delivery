@@ -9,6 +9,7 @@ import { Mutex } from 'async-mutex'
 
 // create a new mutex
 console.log(process.env.NEXT_PUBLIC_HOST);
+console.log(process.env.NODE_ENV);
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({ 
     baseUrl: `${process.env.NEXT_PUBLIC_HOST}/api`,
