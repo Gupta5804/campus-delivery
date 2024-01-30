@@ -34,11 +34,12 @@ services:
     build:
       context: .
       dockerfile: apps/docker/www/Dockerfile.prod
-    volumes:
-      - node_modules:/app/www/node_modules
-    args:
+      args:
       - NEXT_PUBLIC_HOST=${NEXT_PUBLIC_HOST}
       - NODE_ENV=${NODE_ENV}
+    volumes:
+      - node_modules:/app/www/node_modules
+    
     ports:
       - 3000:3000
 
