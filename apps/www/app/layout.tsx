@@ -29,6 +29,7 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col relative pb-20">
         <Provider>
           <Setup/>
+          <Navbar/>
           <div className="px-2 sm:px-6 md:px-8 my-8">
           {children}
           </div>

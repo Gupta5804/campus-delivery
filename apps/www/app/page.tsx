@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { LoginForm } from '@/components/forms';
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
   title: 'CampusConnect | Home',
@@ -61,9 +62,12 @@ export default function Page(){
             
             <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
 
+       
+
+            
 
               <h2 className="mt-6 text-center font-light leading-9 tracking-tight text-gray-900 subpixel-antialiased ">
-                Sign in to your account
+              <UserCircleIcon className='block h-7 w-7 mx-auto'/> Sign in to your account
               </h2>
             </div>
 
