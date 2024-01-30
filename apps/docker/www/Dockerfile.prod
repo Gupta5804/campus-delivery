@@ -1,12 +1,11 @@
 FROM node:alpine
-ENV NODE_ENV=production
-ENV NEXT_PUBLIC_HOST=http://13.234.207.114:1337/
 
 # CMD [ "mkdir", "/app/www/" ]
 
 WORKDIR /app/www
 
 COPY ./apps/www/ .
+
 
 RUN npm install
 
