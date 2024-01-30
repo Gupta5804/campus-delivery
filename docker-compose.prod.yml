@@ -43,6 +43,7 @@ services:
       - HOSTNAME=${HOSTNAME}
       - PORT=${PORT}
       - NEXT_PUBLIC_HOST=${NEXT_PUBLIC_HOST}
+      - NODE_ENV=${NODE_ENV}
     ports:
       - 3000:3000
 
