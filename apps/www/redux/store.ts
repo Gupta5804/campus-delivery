@@ -10,7 +10,7 @@ export const makeStore = () =>
             auth: authReducer
         },
         middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware),
-        devTools: process.env.NODE_ENV != 'production'
+        devTools: true
     })
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
