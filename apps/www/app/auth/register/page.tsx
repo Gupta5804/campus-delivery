@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { RegisterForm } from '@/components/forms';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'CampusConnect | Register',
@@ -14,6 +15,7 @@ export default function Page(){
         <>
         <div className="mx-auto mt-5 mb-5 md:w-7/12">
           <div className="card px-6 py-6 shadow-xl bg-gradient-to-r from-gray-300 via-slate-100 to-gray-300">
+            
             <img
             className= "self-center p-3 border-2 border-white bg-gradient-to-r from-gray-200 via-slate-50 to-gray-200"
             src= '/image/color-logo-png.png'

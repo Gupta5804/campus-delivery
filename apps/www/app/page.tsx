@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { LoginForm } from '@/components/forms';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'CampusConnect | Home',
@@ -38,7 +39,7 @@ export default function Page(){
             </div>
           </div> 
           <div id="slide4" className="carousel-item relative w-full">
-            <img src="https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg" className="w-full" />
+            <img src="https://media.licdn.com/dms/image/sync/D4D27AQFSFLXAQSm5Ag/articleshare-shrink_800/0/1705436015966?e=2147483647&v=beta&t=KWahHfb1xMf5b__Duz4lgTaPTno3jdrjxLxR1TlTmQ0" className="w-full" />
             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
               <a href="#slide3" className="btn btn-circle">❮</a> 
               <a href="#slide1" className="btn btn-circle">❯</a>
