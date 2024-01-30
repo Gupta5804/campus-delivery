@@ -1,18 +1,20 @@
 FROM node:alpine
 
 # CMD [ "mkdir", "/app/www/" ]
+WORKDIR /app/www
+COPY ./apps/www/ .
+
+
 ARG NODE_ENV
 RUN echo $NODE_ENV 
 ENV NODE_ENV $NODE_ENV
 ARG NEXT_PUBLIC_HOST
 RUN echo $NEXT_PUBLIC_HOST 
-ENV NEXT_PUBLIC_HOST=$NEXT_PUBLIC_HOST
+ENV NEXT_PUBLIC_HOST $NEXT_PUBLIC_HOST
 
 
 
-WORKDIR /app/www
 
-COPY ./apps/www/ .
 
 RUN npm install
 RUN npm run build
