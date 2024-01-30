@@ -25,9 +25,6 @@ services:
       - REDIRECT_URLS=${REDIRECT_URLS}
       - GOOGLE_AUTH_KEY=${GOOGLE_AUTH_KEY}
       - GOOGLE_AUTH_SECRET_KEY=${GOOGLE_AUTH_SECRET_KEY}
-      - HOSTNAME = ${HOSTNAME}"
-      - PORTs=${PORTs}
-      - NEXT_PUBLIC_HOST=${NEXT_PUBLIC_HOST}
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
       - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
       - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
@@ -40,8 +37,6 @@ services:
     volumes:
       - node_modules:/app/www/node_modules
     environment:
-      - HOSTNAME=${HOSTNAME}
-      - PORT=${PORT}
       - NEXT_PUBLIC_HOST=${NEXT_PUBLIC_HOST}
       - NODE_ENV=${NODE_ENV}
     ports:

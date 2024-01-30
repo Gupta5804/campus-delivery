@@ -8,7 +8,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 export default function Navbar() {
     return (
         
-        <Disclosure as="nav" className="bg-gradient-to-r from-gray-800 via-gray-500 to-gray-200">
+        <Disclosure as="nav" className="bg-gradient-to-l from-gray-500 via-gray-300 to-gray-500 drop-shadow-lg">
             {({ open }) => (
               <>
                 <div className="max-w-7xl px-2 sm:px-6 lg:px-8">
