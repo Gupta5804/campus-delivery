@@ -7,7 +7,7 @@ export default async function continueWithSocialAuth(
 	try {
 		const url = `${
 			process.env.NEXT_PUBLIC_HOST
-		}/api/o/${provider}/?redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}/auth/${redirect}`;
+		}/api/o/${provider}/?redirect_uri=${process.env.NEXT_PUBLIC_HOST}/auth/${redirect}`;
 
 		const res = await fetch(url, {
 			method: 'GET',
