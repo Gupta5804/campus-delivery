@@ -3,6 +3,7 @@ import { LoginForm } from '@/components/forms';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { SocialButtons } from '@/components/common';
 
 export const metadata: Metadata = {
   title: 'CampusConnect | Home',
@@ -80,6 +81,7 @@ export default function Page(){
                   className = 'font-semibold leading-6 text-indigo-500 hover:text-indigo-200'
                   >Register Here</Link>
               </p>
+              <SocialButtons/>
 
             </div>
           </div>

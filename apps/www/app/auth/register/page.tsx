@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { RegisterForm } from '@/components/forms';
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { SocialButtons } from '@/components/common';
 
 export const metadata: Metadata = {
   title: 'CampusConnect | Register',
@@ -40,6 +41,7 @@ export default function Page(){
                   className = 'font-semibold leading-6 text-indigo-500 hover:text-indigo-200'
                   >Login Here</Link>
               </p>
+              <SocialButtons/>
 
             </div>
           </div>
