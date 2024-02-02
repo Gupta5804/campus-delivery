@@ -27,6 +27,7 @@ export default function useLogin() {
         dispatch(setAuth());
         toast.info('Logged In');
         router.push('/dashboard');
+        router.reload();
         
       })
       .catch(() => {
