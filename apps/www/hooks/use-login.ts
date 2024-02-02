@@ -27,7 +27,9 @@ export default function useLogin() {
         dispatch(setAuth());
         toast.info('Logged In');
         router.push('/dashboard');
-        window.location.reload();
+        setTimeout(function() {
+          window.location.reload();
+        }, 3000);
         
       })
       .catch(() => {

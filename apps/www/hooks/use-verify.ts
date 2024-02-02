@@ -10,7 +10,8 @@ export default function useVerify(){
         verify(undefined)
             .unwrap()
             .then(() => {
-                dispatch(setAuth())
+                dispatch(setAuth());
+                
             })
             .finally(() =>{
                 dispatch(finishInitialLoad());
