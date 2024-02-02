@@ -38,7 +38,7 @@ export default function Navbar() {
         >
           Dashboard
         </NavLink>
-        <NavLink isMobile={isMobile} onCLick={handleLogout}>
+        <NavLink isMobile={isMobile} onClick={handleLogout}>
           Logout
         </NavLink>
       </>
