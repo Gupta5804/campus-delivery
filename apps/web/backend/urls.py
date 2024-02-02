@@ -15,10 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from djoser import views as djoser_views
+from users.serializers import CustomUserSerializer
+user_views = djoser_views.UserViewSet.as_view({
+    'get': 'retrieve',  # This is for retrieving user information
+    'put': 'update',    # This is for updating user information
+    'patch': 'partial_update',  # This is for partial updates
+}, serializer_class=CustomUserSerializer)  # Include the custom serializer class
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('djoser.urls')),
-    path('api/',include('users.urls'))
+    path('api/',include('users.urls')),
+    path('api/users/me/', user_views, name='user-me'),
 
 ]

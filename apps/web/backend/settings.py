@@ -170,8 +170,10 @@ DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE':True,
     'PASSWORD_RESET_CONFIRM_RETYPE':True,
     'TOKEN_MODEL':None,
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS':os.environ.get("REDIRECT_URLS")
-
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS':os.environ.get("REDIRECT_URLS"),
+    'SERIALIZERS':{
+        'current_user':'users.serializers.CustomUserSerializer',
+    },
 }
 
 AUTH_COOKIE = 'access'
