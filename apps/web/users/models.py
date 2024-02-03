@@ -40,6 +40,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
     
     
 class ShopProfile(models.Model):
@@ -50,3 +52,8 @@ class ShopProfile(models.Model):
     about_shop = models.CharField(max_length=500, blank=True, null=True)
     contact_no = models.CharField(max_length=20, blank=True, null=True)
     is_open = models.BooleanField(default=True)
+    delivery_charges = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    extra_charges = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def __str__(self):
+        return f"{self.shop_name} - {self.user.get_full_name()}"

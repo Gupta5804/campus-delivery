@@ -7,6 +7,7 @@ import type {
 import { setAuth, logout } from '../features/authSlice'
 import { Mutex } from 'async-mutex'
 
+
 // create a new mutex
 console.log(process.env.NEXT_PUBLIC_HOST);
 console.log(process.env.NODE_ENV);

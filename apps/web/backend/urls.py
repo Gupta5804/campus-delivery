@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('djoser.urls')),
     path('api/',include('users.urls')),
+    path('api/',include('orders.urls')),
+    path('api/',include('products.urls')),
     path('api/users/me/', user_views, name='user-me'),
 
 ]
