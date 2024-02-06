@@ -1,7 +1,10 @@
 from django.conf import settings
 
+from .models import ShopProfile
+from .serializers import ShopProfileSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import viewsets, permissions
 from rest_framework import status
 from djoser.social.views import ProviderAuthView
 from rest_framework_simplejwt.views import (
@@ -11,7 +14,57 @@ from rest_framework_simplejwt.views import (
 )
 
 
+class ShopProfileViewSet(viewsets.ModelViewSet):
+    serializer_class = ShopProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):  # /shop-profiles GET
+        user = self.request.user
+        if user.user_type == 'customer':
+            # For customers, return all shops
+            return ShopProfile.objects.all()
+        elif user.user_type == 'shop':
+            # For shop users, return only their own shop
+            return ShopProfile.objects.filter(user=user)
+        else:
+            return ShopProfile.objects.none()
+
+    def create(self, request, *args, **kwargs): #/shop-profiles POST
+        user = self.request.user
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        if user.user_type == 'customer':
+            # Customers should not be allowed to create shops
+            return Response({'detail': 'Not allowed for customer users.'}, status=403)
+
+        serializer.save(user=user)
+        return Response(serializer.data, status=201) 
+
+    def update(self, request, *args, **kwargs): #/shop-profiles PUT
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+
+        user = self.request.user
+        if user.user_type == 'customer':
+            # Customers should not be allowed to update shops
+            return Response({'detail': 'Not allowed for customer users.'}, status=403)
+
+        serializer.save()
+        return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        user = self.request.user
+
+        if user.user_type == 'customer':
+            # Customers should not be allowed to delete shops
+            return Response({'detail': 'Not allowed for customer users.'}, status=403)
+
+        self.perform_destroy(instance)
+        return Response(status=204)
+    
 class CustomProviderAuthView(ProviderAuthView):
     def post(self,request,*args,**kwargs):
         response = super().post(request,*args,**kwargs)

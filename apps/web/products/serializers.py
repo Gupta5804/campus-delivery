@@ -1,14 +1,17 @@
 from rest_framework import serializers
-from .models import Category, Product
+from .models import Product, Category
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'category_name']
-        read_only_fields = ['id']
+        fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()  # Use the CategorySerializer for the related category
+    shop = serializers.StringRelatedField()  # Use StringRelatedField for the related shop
+
     class Meta:
         model = Product
-        fields = ['id', 'product_name', 'category', 'description', 'price', 'available_quantity', 'shop']
-        read_only_fields = ['id', 'shop']
+        fields = '__all__'
+
+

@@ -56,4 +56,4 @@ class ShopProfile(models.Model):
     extra_charges = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
-        return f"{self.shop_name} - {self.user.get_full_name()}"
+        return f"{self.shop_name} - {self.user.email}"

@@ -1,12 +1,16 @@
-from django.urls import path , re_path
+from django.urls import path , re_path, include
+from rest_framework.routers import DefaultRouter
 from .views import (
     CustomProviderAuthView,
     CustomTokenObtainPairView,
     CustomTokenRefreshView,
     CustomTokenVerifyView,
     LogoutView,
-    
+    ShopProfileViewSet
 )
+router = DefaultRouter()
+router.register(r'shop-profiles', ShopProfileViewSet, basename='shop-profiles')
+
 
 urlpatterns = [
     re_path(
@@ -14,7 +18,7 @@ urlpatterns = [
         CustomProviderAuthView.as_view(),
         name='provider-auth'
     ),
-    
+    path('', include(router.urls)),
     path('jwt/create/', CustomTokenObtainPairView.as_view()),
     path('jwt/refresh/', CustomTokenRefreshView.as_view()),
     path('jwt/verify/', CustomTokenVerifyView.as_view()),
