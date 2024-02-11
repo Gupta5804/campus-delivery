@@ -12,7 +12,7 @@ import { NavLink } from '@/components/common';
 
 
 
-function classNames(...classes) {
+function classNames(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(' ')
 }
 
