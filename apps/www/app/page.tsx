@@ -20,28 +20,28 @@ export default function Page(){
         <div className="hidden md:block w-6/12 p-3 mt-3 mb-3">
         <div className="carousel md:w-full h-full shadow-xl ">
           <div id="slide1" className="carousel-item relative w-full">
-            <img src="https://www.iitbhilai.ac.in/index.php?pid=img_glimpses_pc_g1" className="w-full" />
+            <img src="image/slide1.jpg" className="w-full" />
             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
               <a href="#slide4" className="btn btn-circle">❮</a> 
               <a href="#slide2" className="btn btn-circle">❯</a>
             </div>
           </div> 
           <div id="slide2" className="carousel-item relative w-full">
-            <img src="https://www.iitbhilai.ac.in/index.php?pid=img_glimpses_pc_g3" className="w-full" />
+            <img src="image/slide2.jpg" className="w-full" />
             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
               <a href="#slide1" className="btn btn-circle">❮</a> 
               <a href="#slide3" className="btn btn-circle">❯</a>
             </div>
           </div> 
           <div id="slide3" className="carousel-item relative w-full">
-            <img src="https://cached.imagescaler.hbpl.co.uk/resize/scaleHeight/1272/cached.offlinehbpl.hbpl.co.uk/galleries/NAW/G2_159.jpg" className="w-full" />
+            <img src="image/slide3.jpg" className="w-full" />
             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
               <a href="#slide2" className="btn btn-circle">❮</a> 
               <a href="#slide4" className="btn btn-circle">❯</a>
             </div>
           </div> 
           <div id="slide4" className="carousel-item relative w-full">
-            <img src="https://media.licdn.com/dms/image/sync/D4D27AQFSFLXAQSm5Ag/articleshare-shrink_800/0/1705436015966?e=2147483647&v=beta&t=KWahHfb1xMf5b__Duz4lgTaPTno3jdrjxLxR1TlTmQ0" className="w-full" />
+            <img src="image/slide4.jpg" className="w-full" />
             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
               <a href="#slide3" className="btn btn-circle">❮</a> 
               <a href="#slide1" className="btn btn-circle">❯</a>
@@ -52,7 +52,7 @@ export default function Page(){
 
         <div className="relative mx-auto">
           
-          <div className="card px-6 py-6 shadow-xl bg-gradient-to-r from-gray-300 via-slate-100 to-gray-300">
+          <div className="card px-6 py-6 shadow-xl bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-400">
            {/*<img
             className= "self-center p-3 border-2 border-white bg-gradient-to-r from-gray-200 via-slate-50 to-gray-200"
             src= '/image/color-logo-png.png'

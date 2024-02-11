@@ -12,9 +12,9 @@ export default function Spinner({ sm, md, lg }: Props){
         'w-8 h-8':lg,
     });
     return(
-        <div role='status'>
+        <span role='status'>
             <TbFidgetSpinner className={className}/>
             <span className="sr-only">Loading...</span>
-        </div>
+        </span>
     )
 }

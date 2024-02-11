@@ -8,6 +8,8 @@ import { setAuth, logout } from '../features/authSlice'
 import { Mutex } from 'async-mutex'
 
 
+
+
 // create a new mutex
 console.log(process.env.NEXT_PUBLIC_HOST);
 console.log(process.env.NODE_ENV);
@@ -37,8 +39,11 @@ const baseQueryWithReauth: BaseQueryFn<
           api,
           extraOptions
         )
+        console.log(refreshResult.data);
         if (refreshResult.data) {
-          api.dispatch(setAuth())
+          
+          console.log(args);
+          api.dispatch(setAuth());
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
@@ -62,5 +67,4 @@ export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: baseQueryWithReauth,
     endpoints: builder =>({}),
-})
-
+});

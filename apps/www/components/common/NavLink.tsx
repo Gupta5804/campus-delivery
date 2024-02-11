@@ -23,7 +23,7 @@ export default function NavLink({
         'text-white rounded-md px-3 py-2 font-medium',
         {
             'bg-gray-900': isSelected,
-            'text-gray-300 hover:bg-gray-700 hover:text-white': !isSelected && !isBanner,
+            'text-gray-300 hover:bg-white hover:text-gray-700': !isSelected && !isBanner,
             'block text-base': isMobile,
             'text-sm': !isMobile,
             'text-gray-300': isBanner,

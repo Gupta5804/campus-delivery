@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { useLoginMutation } from "@/redux/features/authApiSlice";
+import { useLoginMutation , useRetrieveUserQuery} from "@/redux/features/authApiSlice";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { setAuth } from "@/redux/features/authSlice";
 import { useAppDispatch } from '@/redux/hooks';
@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 export default function useLogin() {
     const router = useRouter();
     const dispatch = useAppDispatch();
+    
     const [login, { isLoading }] = useLoginMutation();
   
     const [formData, setFormData] = useState({
@@ -19,17 +20,18 @@ export default function useLogin() {
       const { name, value } = event.target;
       setFormData({ ...formData, [name]: value });
     }
+    const { data: userInfo } = useRetrieveUserQuery();
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       login({ email, password })
       .unwrap()
       .then(() =>{
-        dispatch(setAuth());
+        dispatch(setAuth({ user_type: userInfo?.user_type || '' }));
         toast.info('Logged In');
         router.push('/dashboard');
-        setTimeout(function() {
-          window.location.reload();
-        }, 3000);
+         setTimeout(function() {
+           window.location.reload();
+         }, 3000); 
         
       })
       .catch(() => {

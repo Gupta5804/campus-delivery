@@ -5,7 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useAppDispatch } from '@/redux/hooks';
 import { setAuth } from '@/redux/features/authSlice';
 import { toast } from 'react-toastify';
-import { Suspense } from 'react'
+import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
+
 
 export default function useSocialAuth(authenticate: any, provider: string) {
 	const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 	const searchParams = useSearchParams();
 
 	const effectRan = useRef(false);
-
+	const { data: userInfo } = useRetrieveUserQuery();
 	useEffect(() => {
 		const state = searchParams.get('state');
 		const code = searchParams.get('code');
@@ -22,7 +23,7 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 			authenticate({ provider, state, code })
 				.unwrap()
 				.then(() => {
-					dispatch(setAuth());
+					dispatch(setAuth({ user_type: userInfo?.user_type || '' }));
 					toast.success('Logged in');
 					router.push('/dashboard');
 				})
