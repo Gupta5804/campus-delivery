@@ -43,7 +43,9 @@ const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data) {
           
           console.log(args);
-          api.dispatch(setAuth());
+          const currentState = api.getState();
+          const currentUserType = currentState.auth.user_type;
+          api.dispatch(setAuth({ user_type: currentUserType }));
           // retry the initial query
           result = await baseQuery(args, api, extraOptions)
         } else {
