@@ -1,8 +1,9 @@
 pipeline {
     agent any
-    stages{
-        stage("Verifying tooling"){
-            steps{
+    
+    stages {
+        stage("Verifying tooling") {
+            steps {
                 sh '''
                     whoami
                     docker version
@@ -10,75 +11,75 @@ pipeline {
                     docker-compose version
                     curl --version
                     jq --version
-
                 '''
             }
         }
-        // docker stop $(docker ps -a -q)
-        //             docker rm $(docker ps -a -q)
-        //             docker rmi $(docker images -a -q)
-        //             docker volume rm $(docker volume ls -q)
-        stage("Stopping containers and Removing Containers,Volumes,Images"){
-            steps{
-                sh '''
-                    { docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi $(docker images -a -q) && docker volume rm $(docker volume ls -q); } || { docker system prune -a -f; }
 
-                    
+        stage("Stopping containers and Removing Containers, Volumes, Images") {
+            steps {
+                script {
+                    sh '''
+                        { docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi $(docker images -a -q) && docker volume rm $(docker volume ls -q); } || { docker system prune -a -f; }
                     '''
+                }
             }
         }
         
-        stage('Start container'){
-            steps{
-                
-                script{
-                   withEnv([
-                    "ALLOWED_HOSTS = ${env.ALLOWED_HOSTS}",
-                    "DATABASE_URL = ${env.DATABASE_URL}",
-                    "DEBUG = ${env.DEBUG}",
-                    "SECRET_KEY = ${env.SECRET_KEY}",
-                    "AWS_SES_FROM_EMAIL = ${env.AWS_SES_FROM_EMAIL}",
-                    "AWS_SES_ACCESS_KEY_ID = ${env.AWS_SES_ACCESS_KEY_ID}",
-                    "AWS_SES_SECRET_ACCESS_KEY = ${env.AWS_SES_SECRET_ACCESS_KEY}",
-                    "DOMAIN = ${env.DOMAIN}",
-                    "CORS_ALLOWED_ORIGINS = ${env.CORS_ALLOWED_ORIGINS}",
-                    "AUTH_COOKIE_SECURE = ${env.AUTH_COOKIE_SECURE}",
-                    "REDIRECT_URLS = ${env.REDIRECT_URLS}",
-                    "GOOGLE_AUTH_KEY = ${env.GOOGLE_AUTH_KEY}",
-                    "GOOGLE_AUTH_SECRET_KEY = ${env.GOOGLE_AUTH_SECRET_KEY}",
-                    "NEXT_PUBLIC_HOST = ${env.NEXT_PUBLIC_HOST}",
-                    "NEXT_PUBLIC_REDIRECT_URL = ${env.NEXT_PUBLIC_REDIRECT_URL}",
-                    "DJANGO_SUPERUSER_PASSWORD=${env.DJANGO_SUPERUSER_PASSWORD}",
-                    "DJANGO_SUPERUSER_USERNAME=${env.DJANGO_SUPERUSER_USERNAME}",
-                    "DJANGO_SUPERUSER_EMAIL=${env.DJANGO_SUPERUSER_EMAIL}",
-                    "NODE_ENV=${env.NODE_ENV}",
-                    ]){
-
-                    echo '[ALLOWED_HOSTS = ${env.ALLOWED_HOSTS},DATABASE_URL = ${env.DATABASE_URL},DEBUG = ${env.DEBUG},SECRET_KEY = ${env.SECRET_KEY}]'
+        stage('Start container') {
+            steps {
+                script {
+                    withEnv([
+                        "ALLOWED_HOSTS=${env.ALLOWED_HOSTS}",
+                        "DATABASE_URL=${env.DATABASE_URL}",
+                        "DEBUG=${env.DEBUG}",
+                        "SECRET_KEY=${env.SECRET_KEY}",
+                        "AWS_SES_FROM_EMAIL=${env.AWS_SES_FROM_EMAIL}",
+                        "AWS_SES_ACCESS_KEY_ID=${env.AWS_SES_ACCESS_KEY_ID}",
+                        "AWS_SES_SECRET_ACCESS_KEY=${env.AWS_SES_SECRET_ACCESS_KEY}",
+                        "DOMAIN=${env.DOMAIN}",
+                        "CORS_ALLOWED_ORIGINS=${env.CORS_ALLOWED_ORIGINS}",
+                        "AUTH_COOKIE_SECURE=${env.AUTH_COOKIE_SECURE}",
+                        "REDIRECT_URLS=${env.REDIRECT_URLS}",
+                        "GOOGLE_AUTH_KEY=${env.GOOGLE_AUTH_KEY}",
+                        "GOOGLE_AUTH_SECRET_KEY=${env.GOOGLE_AUTH_SECRET_KEY}",
+                        "NEXT_PUBLIC_HOST=${env.NEXT_PUBLIC_HOST}",
+                        "NEXT_PUBLIC_REDIRECT_URL=${env.NEXT_PUBLIC_REDIRECT_URL}",
+                        "DJANGO_SUPERUSER_PASSWORD=${env.DJANGO_SUPERUSER_PASSWORD}",
+                        "DJANGO_SUPERUSER_USERNAME=${env.DJANGO_SUPERUSER_USERNAME}",
+                        "DJANGO_SUPERUSER_EMAIL=${env.DJANGO_SUPERUSER_EMAIL}",
+                        "NODE_ENV=${env.NODE_ENV}",
+                    ]) {
+                        echo '[ALLOWED_HOSTS=${env.ALLOWED_HOSTS},DATABASE_URL=${env.DATABASE_URL},DEBUG=${env.DEBUG},SECRET_KEY=${env.SECRET_KEY}]'
                     
-                    sh 'docker-compose -f docker-compose.prod.yml run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d cciitbhilai.shop'
-                    sh 'docker-compose -f docker-compose.prod.yml up -d --build'
-                    sh 'docker-compose -f docker-compose.prod.yml ps'
-                    
-
-                   } 
+                        sh 'docker-compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d cciitbhilai.shop'
+                        sh 'docker-compose -f docker-compose.prod.yml up -d --build'
+                        sh 'docker-compose -f docker-compose.prod.yml ps'
+                    }
                 }
-                //sh 'docker-compose -f docker-compose.prod.yml up -d --build'
-                //sh 'docker-compose -f docker-compose.prod.yml ps'
             }
         }
-        stage('Running tests against the container'){
-            steps{
-                //sh 'docker system prune -f'
+        
+        stage('Running tests against the container') {
+            steps {
                 sh 'curl https://localhost'
             }
         }
 
+        stage('Reload Nginx for SSL') {
+            steps {
+                script {
+                    sh 'docker-compose -f docker-compose.prod.yml exec nginx nginx -s reload'
+                }
+            }
+        }
     }
-    //post {
-    //    always {
-    //        sh 'docker-compose down --remove-orphans -v'
-    //        sh 'docker-compose ps'
-    //    }
-    //}
+
+    post {
+        always {
+            // Cleanup: Remove unused Docker resources
+            script {
+                sh 'docker system prune -f'
+            }
+        }
+    }
 }
