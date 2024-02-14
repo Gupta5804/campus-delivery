@@ -1,16 +1,6 @@
 version: '3.9'
 
 services:
-  letsencrypt:
-    container_name: 'certbot-service'
-    image: certbot/certbot
-    command: sh -c "certbot certonly --webroot -w /tmp/acme_challenge -d cciitbhilai.shop --text --agree-tos --email gupta.rishabh.abcd@gmail.com --rsa-key-size 4096 --verbose --keep-until-expiring --preferred-challenges=http"
-    entrypoint: ""
-    volumes:
-      - "/etc/letsencrypt:/etc/letsencrypt"
-      - "/tmp/acme_challenge:/tmp/acme_challenge"
-    environment:
-      - TERM=xterm
   web:
     container_name: web
     build:
@@ -63,10 +53,17 @@ services:
       dockerfile: apps/docker/nginx/Dockerfile
     volumes:
       - static:/app/web/static
-      - /etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
     ports:
+      - 80:80
       - 443:443
 
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
 volumes:
   static:
