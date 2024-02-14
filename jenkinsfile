@@ -68,8 +68,8 @@ pipeline {
         }
         stage('Running tests against the container'){
             steps{
-                sh 'docker system prune -f'
-                sh 'curl http://localhost:1337'
+                //sh 'docker system prune -f'
+                sh 'curl https://localhost'
             }
         }
 
