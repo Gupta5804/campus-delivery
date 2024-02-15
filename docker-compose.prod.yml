@@ -53,8 +53,8 @@ services:
       dockerfile: apps/docker/nginx/Dockerfile
     volumes:
       - static:/app/web/static
-      - /etc/letsencrypt/:/etc/letsencrypt/:ro
-      - ./certbot/www/:/etc/letsencrypt/:ro
+      - /etc/letsencrypt/:/etc/letsencrypt/
+      - ./certbot/www/:/etc/letsencrypt/
     ports:
       - 80:80
       - 443:443
