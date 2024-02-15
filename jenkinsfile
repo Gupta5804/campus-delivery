@@ -125,7 +125,7 @@ pipeline {
         always {
             // Cleanup: Remove unused Docker resources
             script {
-                sh 'docker system prune -f'
+                //sh 'docker system prune -f'
             }
         }
     }
