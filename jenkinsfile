@@ -1,6 +1,11 @@
 pipeline {
     agent any
-    
+
+    environment {
+        DOCKER_COMPOSE_CMD = 'docker-compose -f docker-compose.prod.yml'
+        CERTBOT_CMD = "${DOCKER_COMPOSE_CMD} run --rm certbot"
+    }
+
     stages {
         stage("Verifying tooling") {
             steps {
@@ -18,13 +23,14 @@ pipeline {
         stage("Stopping containers and Removing Containers, Volumes, Images") {
             steps {
                 script {
-                    sh '''
-                        { docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi $(docker images -a -q) && docker volume rm $(docker volume ls -q); } || { docker system prune -a -f; }
-                    '''
+                    sh "${DOCKER_COMPOSE_CMD} down --volumes --remove-orphans"
+                    sh "${DOCKER_COMPOSE_CMD} rm -fsv"
+                    sh "${DOCKER_COMPOSE_CMD} down --rmi all"
+                    sh "${DOCKER_COMPOSE_CMD} down --volumes --remove-orphans"
                 }
             }
         }
-        
+
         stage('Start container') {
             steps {
                 script {
@@ -49,16 +55,14 @@ pipeline {
                         "DJANGO_SUPERUSER_EMAIL=${env.DJANGO_SUPERUSER_EMAIL}",
                         "NODE_ENV=${env.NODE_ENV}",
                     ]) {
-                        echo '[ALLOWED_HOSTS=${env.ALLOWED_HOSTS},DATABASE_URL=${env.DATABASE_URL},DEBUG=${env.DEBUG},SECRET_KEY=${env.SECRET_KEY}]'
-                    
-                        sh 'docker-compose -f docker-compose.prod.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d cciitbhilai.shop'
-                        sh 'docker-compose -f docker-compose.prod.yml up -d --build'
-                        sh 'docker-compose -f docker-compose.prod.yml ps'
+                        sh "${CERTBOT_CMD} certonly --webroot --webroot-path /var/www/certbot/ -d cciitbhilai.shop"
+                        sh "${DOCKER_COMPOSE_CMD} up -d --build"
+                        sh "${DOCKER_COMPOSE_CMD} ps"
                     }
                 }
             }
         }
-        
+
         stage('Running tests against the container') {
             steps {
                 sh 'curl https://localhost'
@@ -68,7 +72,7 @@ pipeline {
         stage('Reload Nginx for SSL') {
             steps {
                 script {
-                    sh 'docker-compose -f docker-compose.prod.yml exec nginx nginx -s reload'
+                    sh "${DOCKER_COMPOSE_CMD} exec nginx nginx -s reload"
                 }
             }
         }
