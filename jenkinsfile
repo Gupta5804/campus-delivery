@@ -60,6 +60,7 @@ pipeline {
                         
                         sh "${DOCKER_COMPOSE_CMD} up -d --build"
                         sh "${DOCKER_COMPOSE_CMD} ps"
+                        sh "${DOCKER_COMPOSE_CMD} logs"
                     }
                 }
             }
