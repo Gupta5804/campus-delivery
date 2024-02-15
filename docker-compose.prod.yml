@@ -62,8 +62,10 @@ services:
     image: certbot/certbot:latest
     volumes:
       - certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
     
 volumes:
   static:
   node_modules:
   certs:
+  certbot-www: 
