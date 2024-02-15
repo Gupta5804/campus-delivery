@@ -30,7 +30,17 @@ pipeline {
                 }
             }
         }
-
+        stage('Renew SSL Certificate with Certbot') {
+            steps {
+                script {
+                    withEnv([
+                        // Add your environment variables as needed
+                    ]) {
+                        sh "${CERTBOT_CMD} certonly --webroot --webroot-path /var/www/certbot/ -d cciitbhilai.shop"
+                    }
+                }
+            }
+        }
         stage('Start container') {
             steps {
                 script {
