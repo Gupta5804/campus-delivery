@@ -53,6 +53,7 @@ services:
       dockerfile: apps/docker/nginx/Dockerfile
     volumes:
       - static:/app/web/static
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
       - ./certbot/www/:/etc/letsencrypt/:ro
     ports:
       - 80:80
@@ -66,6 +67,7 @@ services:
     volumes:
       - ./certbot/conf/:/etc/letsencrypt/:rw
       - ./certbot/www/:/var/www/certbot/:rw
+      -
     depends_on:
       - nginx
 volumes:
