@@ -60,7 +60,7 @@ services:
 
   certbot:
     image: certbot/certbot:latest
-    #entrypoint: ["certbot"]
+    entrypoint: ["certbot"]
     command: certonly --webroot --webroot-path=/var/www/certbot --non-interactive --email gupta.rishabh.abcd@gmail.com -d cciitbhilai.shop --agree-tos --no-eff-email
              
     volumes:
