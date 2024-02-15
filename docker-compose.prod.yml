@@ -64,7 +64,7 @@ services:
     depends_on:
       - nginx
     command: >-
-             certonly --reinstall --webroot --webroot-path=/var/www/certbot
+             certonly --install --webroot --webroot-path=/var/www/certbot
              --email gupta.rishabh.abcd@gmail.com --agree-tos --no-eff-email
              -d cciitbhilai.shop
     volumes:
