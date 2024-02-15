@@ -99,20 +99,20 @@ pipeline {
                 }
             }
         }
-
-        stage('Running tests against the container') {
-            steps {
-                sh 'curl https://localhost'
-            }
-        }
-
-        stage('Reload Nginx for SSL') {
+         stage('Reload Nginx for SSL') {
             steps {
                 script {
                     sh "${DOCKER_COMPOSE_CMD} exec nginx nginx -s reload"
                 }
             }
         }
+        stage('Running tests against the container') {
+            steps {
+                sh 'curl https://localhost'
+            }
+        }
+
+       
     }
 
     //post {
