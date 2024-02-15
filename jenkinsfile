@@ -30,7 +30,6 @@ pipeline {
                 }
             }
         }
-
         stage('Start Nginx container') {
             steps {
                 script {
@@ -43,20 +42,56 @@ pipeline {
             steps {
                 script {
                     withEnv([
-                        // Add your environment variables as needed
+                        "ALLOWED_HOSTS=${env.ALLOWED_HOSTS}",
+                        "DATABASE_URL=${env.DATABASE_URL}",
+                        "DEBUG=${env.DEBUG}",
+                        "SECRET_KEY=${env.SECRET_KEY}",
+                        "AWS_SES_FROM_EMAIL=${env.AWS_SES_FROM_EMAIL}",
+                        "AWS_SES_ACCESS_KEY_ID=${env.AWS_SES_ACCESS_KEY_ID}",
+                        "AWS_SES_SECRET_ACCESS_KEY=${env.AWS_SES_SECRET_ACCESS_KEY}",
+                        "DOMAIN=${env.DOMAIN}",
+                        "CORS_ALLOWED_ORIGINS=${env.CORS_ALLOWED_ORIGINS}",
+                        "AUTH_COOKIE_SECURE=${env.AUTH_COOKIE_SECURE}",
+                        "REDIRECT_URLS=${env.REDIRECT_URLS}",
+                        "GOOGLE_AUTH_KEY=${env.GOOGLE_AUTH_KEY}",
+                        "GOOGLE_AUTH_SECRET_KEY=${env.GOOGLE_AUTH_SECRET_KEY}",
+                        "NEXT_PUBLIC_HOST=${env.NEXT_PUBLIC_HOST}",
+                        "NEXT_PUBLIC_REDIRECT_URL=${env.NEXT_PUBLIC_REDIRECT_URL}",
+                        "DJANGO_SUPERUSER_PASSWORD=${env.DJANGO_SUPERUSER_PASSWORD}",
+                        "DJANGO_SUPERUSER_USERNAME=${env.DJANGO_SUPERUSER_USERNAME}",
+                        "DJANGO_SUPERUSER_EMAIL=${env.DJANGO_SUPERUSER_EMAIL}",
+                        "NODE_ENV=${env.NODE_ENV}",
                     ]) {
                         sh "${CERTBOT_CMD} certonly --webroot --webroot-path /var/www/certbot/ -d cciitbhilai.shop"
                     }
                 }
             }
         }
-
         stage('Start container') {
             steps {
                 script {
                     withEnv([
-                        // Add your environment variables as needed
+                        "ALLOWED_HOSTS=${env.ALLOWED_HOSTS}",
+                        "DATABASE_URL=${env.DATABASE_URL}",
+                        "DEBUG=${env.DEBUG}",
+                        "SECRET_KEY=${env.SECRET_KEY}",
+                        "AWS_SES_FROM_EMAIL=${env.AWS_SES_FROM_EMAIL}",
+                        "AWS_SES_ACCESS_KEY_ID=${env.AWS_SES_ACCESS_KEY_ID}",
+                        "AWS_SES_SECRET_ACCESS_KEY=${env.AWS_SES_SECRET_ACCESS_KEY}",
+                        "DOMAIN=${env.DOMAIN}",
+                        "CORS_ALLOWED_ORIGINS=${env.CORS_ALLOWED_ORIGINS}",
+                        "AUTH_COOKIE_SECURE=${env.AUTH_COOKIE_SECURE}",
+                        "REDIRECT_URLS=${env.REDIRECT_URLS}",
+                        "GOOGLE_AUTH_KEY=${env.GOOGLE_AUTH_KEY}",
+                        "GOOGLE_AUTH_SECRET_KEY=${env.GOOGLE_AUTH_SECRET_KEY}",
+                        "NEXT_PUBLIC_HOST=${env.NEXT_PUBLIC_HOST}",
+                        "NEXT_PUBLIC_REDIRECT_URL=${env.NEXT_PUBLIC_REDIRECT_URL}",
+                        "DJANGO_SUPERUSER_PASSWORD=${env.DJANGO_SUPERUSER_PASSWORD}",
+                        "DJANGO_SUPERUSER_USERNAME=${env.DJANGO_SUPERUSER_USERNAME}",
+                        "DJANGO_SUPERUSER_EMAIL=${env.DJANGO_SUPERUSER_EMAIL}",
+                        "NODE_ENV=${env.NODE_ENV}",
                     ]) {
+                        sh "${CERTBOT_CMD} certonly --webroot --webroot-path /var/www/certbot/ -d cciitbhilai.shop"
                         sh "${DOCKER_COMPOSE_CMD} up -d --build"
                         sh "${DOCKER_COMPOSE_CMD} ps"
                     }
