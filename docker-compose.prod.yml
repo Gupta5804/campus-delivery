@@ -60,8 +60,7 @@ services:
 
   certbot:
     image: certbot/certbot:latest
-    command: >-
-             certonly --webroot --webroot-path=/var/www/certbot --non-interactive
+    command: certonly --webroot --webroot-path=/var/www/certbot --non-interactive
              --email gupta.rishabh.abcd@gmail.com -d cciitbhilai.shop --agree-tos --no-eff-email
              
     volumes:
