@@ -57,11 +57,7 @@ pipeline {
                         "DJANGO_SUPERUSER_EMAIL=${env.DJANGO_SUPERUSER_EMAIL}",
                         "NODE_ENV=${env.NODE_ENV}",
                     ]) {
-                        // Start Nginx container
-                    sh "${DOCKER_COMPOSE_CMD} up -d --build nginx"
                     
-                    // Add a delay to allow Nginx to start up (adjust the duration as needed)
-                    sleep time: 5, unit: 'SECONDS'
                         sh "${DOCKER_COMPOSE_CMD} up -d --build"
                         sh "${DOCKER_COMPOSE_CMD} ps"
                         sh "${DOCKER_COMPOSE_CMD} logs"
