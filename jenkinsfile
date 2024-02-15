@@ -58,7 +58,7 @@ pipeline {
                         "DJANGO_SUPERUSER_EMAIL=${env.DJANGO_SUPERUSER_EMAIL}",
                         "NODE_ENV=${env.NODE_ENV}",
                     ]) {
-                        sh "${CERTBOT_CMD} certonly --webroot --webroot-path /var/www/certbot/ -d cciitbhilai.shop --email gupta.rishabh.abcd@gmail.com --agree-tos"
+                        sh "${CERTBOT_CMD} certonly --webroot --webroot-path=/var/www/certbot --non-interactive --email gupta.rishabh.abcd@gmail.com -d cciitbhilai.shop --agree-tos --no-eff-email"
                     }
                     }
                     catch (Exception e) {
