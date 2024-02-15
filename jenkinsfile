@@ -30,13 +30,7 @@ pipeline {
                 }
             }
         }
-        stage('Start Nginx container') {
-            steps {
-                script {
-                    sh "${DOCKER_COMPOSE_CMD} up -d --build nginx"
-                }
-            }
-        }
+        
 
         stage('Renew SSL Certificate with Certbot') {
             steps {
