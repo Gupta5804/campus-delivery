@@ -53,8 +53,8 @@ services:
       dockerfile: apps/docker/nginx/Dockerfile
     volumes:
       - static:/app/web/static
-      - ./etc/nginx/templates:/etc/nginx/templates:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./certbot/conf:/etc/nginx/templates
+      - ./certbot/www:/etc/letsencrypt
     ports:
       - 80:80
       - 443:443
@@ -62,12 +62,12 @@ services:
   certbot:
     image: certbot/certbot:latest
     command: >-
-             certonly --install --webroot --webroot-path=/var/www/certbot
-             --email gupta.rishabh.abcd@gmail.com --agree-tos --no-eff-email
-             -d cciitbhilai.shop
+             certonly --webroot --webroot-path=/var/www/certbot --force-renewal
+             --email gupta.rishabh.abcd@gmail.com -d cciitbhilai.shop --agree-tos --no-eff-email
+             
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-      - ./certbot/data:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     
 volumes:
   static:
