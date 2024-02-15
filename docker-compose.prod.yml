@@ -61,8 +61,6 @@ services:
 
   certbot:
     image: certbot/certbot:latest
-    depends_on:
-      - nginx
     command: >-
              certonly --install --webroot --webroot-path=/var/www/certbot
              --email gupta.rishabh.abcd@gmail.com --agree-tos --no-eff-email
