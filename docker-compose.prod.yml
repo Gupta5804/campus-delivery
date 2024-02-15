@@ -74,5 +74,4 @@ services:
 volumes:
   static:
   node_modules:
-  certs:
-  certbot-www: 
+   
