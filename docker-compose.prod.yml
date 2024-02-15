@@ -62,9 +62,9 @@ services:
   certbot:
     image: certbot/certbot:latest
     volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-    command: certonly --webroot --webroot-path=/var/www/certbot --email gupta.rishabh.abcd@gmail.com --agree-tos --no-eff-email --staging -d cciitbhilai.shop
+      - /certbot/www/:/var/www/certbot/:rw
+      - /certbot/conf/:/etc/letsencrypt/:rw
+    
 volumes:
   static:
   node_modules:
