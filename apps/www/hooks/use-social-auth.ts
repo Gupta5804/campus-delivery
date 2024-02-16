@@ -12,19 +12,20 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	//const { data: userInfo } = useRetrieveUserQuery();
 
 	const effectRan = useRef(false);
-	const { data: userInfo } = useRetrieveUserQuery();
 	useEffect(() => {
 		const state = searchParams.get('state');
 		const code = searchParams.get('code');
-
+		console.log('State:', state);
+    	console.log('Code:', code);
 		if (state && code && !effectRan.current) {
 			authenticate({ provider, state, code })
 				.unwrap()
 				.then(() => {
-					console.log({ user_type: userInfo?.user_type || 'customer' });
-					dispatch(setAuth({ user_type: userInfo?.user_type || 'customer' }));
+					
+					dispatch(setAuth({ user_type: 'customer' }));
 					toast.success('Logged In');
 					router.push('/dashboard');
 				})
