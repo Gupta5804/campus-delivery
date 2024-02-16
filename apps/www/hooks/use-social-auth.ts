@@ -25,8 +25,8 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 				.then(() => {
 					console.log({ user_type: userInfo?.user_type || '' });
 					dispatch(setAuth({ user_type: userInfo?.user_type || '' }));
-					toast.success('Logged in');
-					router.push('/dashboard');
+					toast.success('Account Created, Enter email to set password');
+					router.push('/password-reset');
 				})
 				.catch(() => {
 					toast.error('Failed to log in');
