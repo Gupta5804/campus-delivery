@@ -23,6 +23,7 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 			authenticate({ provider, state, code })
 				.unwrap()
 				.then(() => {
+					console.log({ user_type: userInfo?.user_type || '' });
 					dispatch(setAuth({ user_type: userInfo?.user_type || '' }));
 					toast.success('Logged in');
 					router.push('/dashboard');

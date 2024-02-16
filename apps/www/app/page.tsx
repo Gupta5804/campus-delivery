@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { LoginForm } from '@/components/forms';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { SocialButtons } from '@/components/common';
 
@@ -53,23 +52,13 @@ export default function Page(){
         <div className="relative mx-auto">
           
           <div className="card px-6 py-6 shadow-xl bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-400">
-           {/*<img
-            className= "self-center p-3 border-2 border-white bg-gradient-to-r from-gray-200 via-slate-50 to-gray-200"
-            src= '/image/color-logo-png.png'
-            alt="Your Company"
-            width='220'
-            height='200'
-  /> */}
-            
             <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
-
-       
-
-            
-
-              <h2 className="mt-6 text-center font-light leading-9 tracking-tight text-gray-900 subpixel-antialiased ">
-              <UserCircleIcon className='block h-7 w-7 mx-auto'/> Sign in to your account
+              <h2 className="text-center font-light leading-9 tracking-tight text-gray-900 subpixel-antialiased ">
+                <UserCircleIcon className='block h-7 w-7 mx-auto'/> Sign in to your account
               </h2>
+              <h3 className="text-center font-light tracking-tight text-gray-900 subpixel-antialiased ">
+              (Guests and vendors)
+              </h3>
             </div>
 
             <div className="card-body mx-auto w-full">
@@ -81,10 +70,13 @@ export default function Page(){
                   className = 'font-semibold leading-6 text-indigo-500 hover:text-indigo-200'
                   >Register Here</Link>
               </p>
-              <SocialButtons/>
 
             </div>
           </div>
+          <div className="divider">OR if you have @iitbhilai.ac.in account</div>
+          <span className="flex justify-center w-full">
+            <SocialButtons/>
+          </span>
         </div>
         </div>
     </>

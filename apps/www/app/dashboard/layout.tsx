@@ -4,6 +4,8 @@ import { ReactNode, Fragment, useState } from 'react'
 import { ShoppingCartIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Cartbar from './common/Cartbar';  // Import your Cartbar component
 import SideBar from './common/SideBar'; 
+import { RequireAuth } from "@/components/utils";
+
 interface Props {
   children: React.ReactNode;
 }
@@ -24,6 +26,7 @@ export default function Layout({ children }: Props) {
   };
 
   return (
+    
     <div className="flex h-screen overflow-hidden bg-gray-100">
 		{/* Sidebar */}
 		<SideBar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
@@ -33,7 +36,9 @@ export default function Layout({ children }: Props) {
       {/* Content area */}
       <div className="flex-1 overflow-x-hidden overflow-y-auto">
         {/* Your existing content */}
+        <RequireAuth>
         {children}
+        </RequireAuth>
 
         {/* Button to open the Cartbar */}
 		<button
