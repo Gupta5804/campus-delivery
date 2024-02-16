@@ -1,5 +1,28 @@
 import { apiSlice } from "../services/apiSlice";
-
+interface ShopProduct {
+    id: number;
+    category: {
+      id: number;
+      category_name: string;
+    };
+    shop: string;
+    product_name: string;
+    description: string;
+    price: string;
+    active: boolean;
+  }
+interface ShopProfile {
+    id: number;
+    shop_name: string;
+    shop_description: string;
+    address: string;
+    about_shop: string | null;
+    contact_no: string | null;
+    is_open: boolean;
+    delivery_charges: string;
+    extra_charges: string;
+    user: number;
+  }
 interface User {
     first_name: string;
     last_name: string;
@@ -33,6 +56,12 @@ const authApiSlice = apiSlice.injectEndpoints({
                 }
             })
         }),
+        shopProfile: builder.query<ShopProfile[], void>({
+            query: () => '/shop-profiles/'
+          }),
+        shopProducts: builder.query<ShopProduct[], number>({
+            query: (shopProfileId) => `shop-profiles/${shopProfileId}/products/`,
+          }),
         login: builder.mutation({
             query: ({ email, password }) => ({
                 url: '/jwt/create/',
@@ -101,6 +130,8 @@ export const {
     useLogoutMutation,
     useActivationMutation,
     useResetPasswordMutation,
-    useResetPasswordConfirmMutation
+    useResetPasswordConfirmMutation,
+    useShopProfileQuery,
+    useShopProductsQuery,
 } = authApiSlice; //hooks
 

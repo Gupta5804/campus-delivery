@@ -1,5 +1,4 @@
 from django.conf import settings
-
 from .models import ShopProfile
 from .serializers import ShopProfileSerializer
 from rest_framework.views import APIView
@@ -13,6 +12,21 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 
+from rest_framework.generics import ListAPIView
+from products.models import Product  # Assuming you have a Product model
+
+from products.serializers import ProductSerializer
+
+class ShopProductsAPIView(ListAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        # Get the ShopProfile ID from the URL parameters
+        shop_profile_id = self.kwargs.get('pk')
+
+        # Query the products related to the specified ShopProfile
+        return Product.objects.filter(shop__id=shop_profile_id)
 
 class ShopProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ShopProfileSerializer

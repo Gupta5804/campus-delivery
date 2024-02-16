@@ -6,7 +6,8 @@ from .views import (
     CustomTokenRefreshView,
     CustomTokenVerifyView,
     LogoutView,
-    ShopProfileViewSet
+    ShopProfileViewSet,
+    ShopProductsAPIView
 )
 router = DefaultRouter()
 router.register(r'shop-profiles', ShopProfileViewSet, basename='shop-profiles')
@@ -22,5 +23,7 @@ urlpatterns = [
     path('jwt/create/', CustomTokenObtainPairView.as_view()),
     path('jwt/refresh/', CustomTokenRefreshView.as_view()),
     path('jwt/verify/', CustomTokenVerifyView.as_view()),
-    path('logout/', LogoutView.as_view())
+    path('logout/', LogoutView.as_view()),
+
+    path('shop-profiles/<int:pk>/products/', ShopProductsAPIView.as_view(), name='shop-profile-products'),
 ]
