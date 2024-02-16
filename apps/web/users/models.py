@@ -45,7 +45,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     
     
 class ShopProfile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='shop_profiles' ,default='None')
     shop_name = models.CharField(max_length=50, blank=True, null=True)
     shop_description = models.TextField(default='')
     address = models.TextField(blank=True, null=True)

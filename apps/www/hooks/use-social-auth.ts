@@ -12,22 +12,21 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	const effectRan = useRef(false);
 	//const { data: userInfo } = useRetrieveUserQuery();
 
-	const effectRan = useRef(false);
 	useEffect(() => {
 		const state = searchParams.get('state');
 		const code = searchParams.get('code');
-		console.log('State:', state);
-    	console.log('Code:', code);
+		
 		if (state && code && !effectRan.current) {
 			authenticate({ provider, state, code })
 				.unwrap()
 				.then(() => {
 					
 					dispatch(setAuth({ user_type: 'customer' }));
-					toast.success('Logged In');
-					router.push('/dashboard');
+					toast.success('Account Created, Enter email to set password');
+					router.push('/forgot-password');
 				})
 				.catch(() => {
 					toast.error('Failed to log in');

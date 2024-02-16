@@ -66,4 +66,9 @@ class Migration(migrations.Migration):
         migrations.DeleteModel(
             name="CustomerProfile",
         ),
+        migrations.AddField(
+        model_name='shopprofile',
+        name='id',
+        field=models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID', default=1),
+    ),
     ]
