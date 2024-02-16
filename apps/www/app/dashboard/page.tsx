@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 // dashboard/page.tsx
 'use client';
 import { Fragment, useEffect, useState } from 'react';
@@ -29,18 +29,18 @@ const getRandomShopImage = () => {
 const Page = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentShopId, setCurrentShopId] = useState<number | null>(null);
-  const [shopProducts, setShopProducts] = useState<ShopProduct[] | null>(null);
+  const [shopProducts, setShopProducts] = useState<ShopProduct[] | undefined>(undefined);
   const [shopProductsLoading, setShopProductsLoading] = useState(false);
   const { data: user, isLoading, isFetching } = useRetrieveUserQuery();
-  const { data: shopProfiles, isLoading: shopProfilesLoading } = useShopProfileQuery();
-
+  
   const shopProductsQuery = useShopProductsQuery(currentShopId || 0);
-
+  
+  const { data: shopProfiles, isLoading: shopProfilesLoading } = useShopProfileQuery();
   useEffect(() => {
     if (isDialogOpen && currentShopId !== null) {
       const fetchShopProducts = async () => {
         try {
-          const result = await shopProductsQuery.refetch(currentShopId);
+          const result = await shopProductsQuery.refetch();
           setShopProducts(result.data);
         } catch (error) {
           console.error("Error fetching shop products:", error);
@@ -51,7 +51,7 @@ const Page = () => {
 
     fetchShopProducts();
     }
-  }, [isDialogOpen, currentShopId]);
+  }, [isDialogOpen, currentShopId, shopProductsQuery]);
 
   const handleOpenMenu = (shopId: number) => {
     setCurrentShopId(shopId);
