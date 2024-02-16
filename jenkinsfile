@@ -81,12 +81,12 @@ pipeline {
        
     }
 
-    //post {
-    //    always {
-    //        // Cleanup: Remove unused Docker resources
-    //        script {
-    //            sh 'docker system prune -f'
-    //        }
-    //    }
-    //}
+    post {
+        always {
+            // Cleanup: Remove unused Docker resources
+            script {
+                sh 'docker system prune -f'
+            }
+        }
+    }
 }
