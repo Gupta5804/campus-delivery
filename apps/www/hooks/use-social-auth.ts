@@ -23,10 +23,10 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 			authenticate({ provider, state, code })
 				.unwrap()
 				.then(() => {
-					console.log({ user_type: userInfo?.user_type || '' });
-					dispatch(setAuth({ user_type: userInfo?.user_type || '' }));
-					toast.success('Account Created, Enter email to set password');
-					router.push('/password-reset');
+					console.log({ user_type: userInfo?.user_type || 'customer' });
+					dispatch(setAuth({ user_type: userInfo?.user_type || 'customer' }));
+					toast.success('Logged In');
+					router.push('/dashboard');
 				})
 				.catch(() => {
 					toast.error('Failed to log in');
