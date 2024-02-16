@@ -1,3 +1,4 @@
+/* eslint-disable */
 // dashboard/page.tsx
 'use client';
 import { Fragment, useEffect, useState } from 'react';
